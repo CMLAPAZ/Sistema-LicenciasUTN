@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+	    <meta charset="UTF-8">
+	    <title>Eliminar</title>
+	    <link rel="stylesheet" th:href="@{/css/styles.css}">
+	    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+	</head>
+<body>
+
+    <!-- ✅ Menú de navegación -->
+
+	<div th:replace="~{fragments/menu :: menu}"></div>
+
+    <div class="flex-grow-1 container mt-4">
+        <h1>📋 Saldos de Licencia de <span th:text="${empleado.nombre}"></span> <span th:text="${empleado.apellido}"></span></h1>
+
+        <!-- 📝 Tabla de Saldos -->
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Año</th>
+                    <th>Días Totales</th>
+                    <th>Días Usados</th>
+                    <th>Días Restantes</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 🚀 Verifica si hay saldos antes de mostrar -->
+                <tr th:if="${#lists.isEmpty(saldos)}">
+                    <td colspan="5" class="text-center text-muted">⚠️ No se encontraron saldos de licencia.</td>
+                </tr>
+
+				<tr th:each="saldo : ${saldos}">
+				    <td th:text="${saldo.anio}"></td>
+				    <td th:text="${saldo.diasTotales}"></td>
+				    <td th:text="${saldo.diasUsados}"></td>
+				    <td th:text="${saldo.diasRestantes}"></td>
+				    <!-- Si los días restantes son 0, mostrar "AGOTADO", si no mostrar otro texto -->
+				    <td th:classappend="${saldo.diasRestantes == 0} ? 'text-danger' : ''"
+				        th:text="${saldo.diasRestantes == 0} ? 'AGOTADO' : 'Disponible'"></td>
+				</tr>
+            </tbody>
+        </table>
+        <a href="/web/empleados" class="btn btn-secondary">🔙 Volver a Empleados</a>
+    </div>
+	<div th:replace="~{fragments/footer :: footer}"></div>
+
+</body>
+</html>

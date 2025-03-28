@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>📋 Lista de Licencias</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+
+    <!-- ✅ Menú de navegación -->
+    <div th:replace="~{fragments/menu :: menu}"></div>
+
+    <main class="container mt-4 flex-grow-1">
+        <div class="container flex-grow-1 mt-4">
+            <h1>📋 Lista de Licencias</h1>
+
+            <!-- ✅ Mensajes -->
+            <div th:if="${mensaje}" class="alert alert-success" th:text="${mensaje}"></div>
+            <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+
+            <!-- 🔍 Formulario de búsqueda -->
+            <form th:action="@{/web/licencias/buscar}" method="get" class="mb-4">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label for="criterio">Buscar por:</label>
+                        <select class="form-control" id="criterio" name="criterio">
+                            <option value="todos" th:selected="${criterio == 'todos'}">🔍 Ver Todas</option>
+                            <option value="legajo" th:selected="${criterio == 'legajo'}">📌 Legajo</option>
+                            <option value="dni" th:selected="${criterio == 'dni'}">🆔 DNI</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-3">
+                        <label for="valor">Ingrese Valor:</label>
+                        <input type="text" class="form-control" id="valor" name="valor" placeholder="Ej: 1001 o 12345678" th:value="${valor}">
+                    </div>
+
+                    <div class="col-md-3 d-flex align-items-end">
+                        <button type="submit" class="btn btn-primary">🔍 Buscar</button>
+                    </div>
+                </div>
+            </form>
+
+            <!-- 📝 Tabla de Licencias -->
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Legajo</th>
+                        <th>Empleado</th>
+                        <th>Fecha Inicio</th>
+                        <th>Fecha Fin</th>
+                        <th>Días Solicitados</th>
+                        <th>Estado</th>
+                        <th>Plus Vacacional</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:if="${licencias != null and #lists.isEmpty(licencias)}">
+                        <td colspan="8" class="text-center text-muted">⚠️ No se encontraron licencias.</td>
+                    </tr>
+
+                    <tr th:each="licencia : ${licencias}">
+                        <td th:text="${licencia.legajo}"></td>
+                        <td th:text="${licencia.empleado}"></td>
+                        <td th:text="${licencia.fechaInicio}"></td>
+                        <td th:text="${licencia.fechaFin}"></td>
+                        <td th:text="${licencia.diasSolicitados}"></td>
+                        <td th:text="${licencia.estado}"></td>
+                        <td th:text="${licencia.plusVacacional}"></td>
+                        <td>
+                            <div th:if="${licencia.estado == 'RECHAZADA'}">
+                                <form th:action="@{/web/licencias/eliminar/{legajo}(legajo=${licencia.legajo})}" method="post"
+                                      class="d-inline"
+                                      onsubmit="return confirm('¿Estás seguro de eliminar esta licencia?');">
+                                    <button type="submit" class="btn btn-outline-secondary btn-sm">🗑 Eliminar</button>
+                                </form>
+                            </div>
+
+                            <div th:if="${licencia.estado == 'PENDIENTE'}">
+                                <form th:action="@{/web/licencias/aprobar/{legajo}(legajo=${licencia.legajo})}" method="post" class="d-inline">
+                                    <button type="submit" class="btn btn-success btn-sm">✔ Aprobar</button>
+                                </form>
+                                <form th:action="@{/web/licencias/rechazar/{legajo}(legajo=${licencia.legajo})}" method="post" class="d-inline">
+                                    <button type="submit" class="btn btn-danger btn-sm">✖ Rechazar</button>
+                                </form>
+                            </div>
+
+                            <div th:if="${licencia.estado == 'APROBADA'}">
+                                <a th:href="@{/web/licencias/imprimir/{legajo}(legajo=${licencia.legajo})}" target="_blank"
+                                   class="btn btn-outline-primary btn-sm">🖨 Imprimir</a>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <a href="/web/empleados" class="btn btn-secondary mt-3">🔙 Volver</a>
+        </div>
+    </main>
+
+    <!-- ✅ Footer -->
+    <footer>
+        <div th:replace="~{fragments/footer :: footer}"></div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const criterioSelect = document.getElementById('criterio');
+            const valorInput = document.getElementById('valor');
+
+            criterioSelect.addEventListener('change', () => {
+                if (criterioSelect.value === 'todos') {
+                    valorInput.value = '';
+                    valorInput.disabled = true;
+                } else {
+                    valorInput.disabled = false;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

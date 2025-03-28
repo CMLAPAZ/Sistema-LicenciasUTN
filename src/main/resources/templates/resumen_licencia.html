@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Resumen de Licencia</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+
+<div th:replace="~{fragments/menu :: menu}"></div> <!-- ✅ Menú de navegación -->
+
+<div class="container flex-grow-1 mt-4">
+    <h1 class="text-center text-success">✅ Licencia Generada con Éxito</h1>
+    
+    <!-- 📌 Datos de la Licencia -->
+    <div class="card mt-4">
+        <div class="card-body">
+            <h5 class="card-title">📄 Detalles de la Licencia</h5>
+            <p><strong>Legajo:</strong> <span th:text="${licencia.legajo}"></span></p>
+            <p><strong>Nombre:</strong> <span th:text="${licencia.empleado}"></span></p>
+            <p><strong>Fecha de Inicio:</strong> <span th:text="${licencia.fechaInicio}"></span></p>
+            <p><strong>Fecha de Fin:</strong> <span th:text="${licencia.fechaFin}"></span></p>
+            <p><strong>Días Solicitados:</strong> <span th:text="${licencia.diasSolicitados}"></span></p>
+            <p><strong>Estado:</strong> <span th:text="${licencia.estado}"></span></p>
+            
+            <!-- 💰 Indicar si tiene plus vacacional -->
+            <p><strong>Plus Vacacional:</strong> 
+                <span th:text="${licencia.plusVacacional} ? '✅ Sí incluido' : '❌ No solicitado'"></span>
+            </p>
+        </div>
+    </div>
+
+    <!-- 🔹 Botones de acción -->
+    <div class="mt-4 text-center">
+        <a href="/web/nueva-licencia" class="btn btn-primary">📝 Solicitar Otra Licencia</a>
+        <a href="/web/licencias" class="btn btn-success">📋 Ver Licencias</a>
+        <a href="/web/" class="btn btn-secondary">🏠 Volver al Inicio</a>
+    </div>
+</div>
+<div th:replace="~{fragments/footer :: footer}"></div>
+<body>
+</html>

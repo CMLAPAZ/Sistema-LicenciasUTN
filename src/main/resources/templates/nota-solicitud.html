@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Nota de Solicitud de Licencia</title>
+    
+    <!-- ✅ Bootstrap + estilos propios -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+
+<div class="container nota mt-5">
+    <p class="text-end">
+        La Paz, <span th:text="${#dates.format(#dates.createNow(), 'dd')}"></span> de
+        <span th:text="${#dates.format(#dates.createNow(), 'MMMM')}"></span> de
+        <span th:text="${#dates.format(#dates.createNow(), 'yyyy')}"></span>
+    </p>
+
+    <p><strong>
+        Sr. Gerente<br/>
+        Juan E. Geminiani<br/>
+        Cooperativa de Electricidad de La Paz y OSP La Paz Ltda<br/>
+        S______________/____________D
+    </strong></p>
+
+    <p>
+        Por medio de la presente, yo <strong th:text="${licencia.empleado.nombre} + ' ' + ${licencia.empleado.apellido}">Nombre Apellido</strong>,
+        con Legajo N° <strong th:text="${licencia.empleado.legajo}">000</strong> y DNI <strong th:text="${licencia.empleado.dni}">00.000.000</strong>,
+        solicito se me otorgue una <strong>licencia ordinaria</strong> por
+        <strong th:text="${licencia.diasSolicitados}">10</strong> días hábiles,
+        correspondiente al período comprendido entre el
+        <strong th:text="${licencia.fechaInicio}">2025-03-01</strong> y el
+        <strong th:text="${licencia.fechaFin}">2025-03-10</strong>.
+    </p>
+
+    <p>
+        Dicha licencia corresponde a los siguientes períodos y saldos:<br/>
+        Año <strong th:text="${anio}">2024</strong> – Saldo restante:
+        <strong th:text="${saldoRestante}">5</strong> días de 14 otorgados.
+    </p>
+
+    <p th:if="${licencia.plusVacacional > 0}">
+        Además, solicito el uso del <strong>Plus Vacacional</strong> correspondiente,
+        conforme a lo establecido.
+    </p>
+
+    <p>Sin otro particular, saludo a Ud. muy atentamente.</p>
+
+    <div class="firma text-end mt-5">
+        <p>......................................................</p>
+        <p><strong th:text="${licencia.empleado.nombre + ' ' + licencia.empleado.apellido}">Firma</strong></p>
+    </div>
+</div>
+
+<!-- ✅ Botón de impresión -->
+<div class="text-center mt-4 no-print">
+    <button class="btn btn-outline-primary" onclick="window.print()">🖨 Imprimir Nota</button>
+</div>
+
+</body>
+</html>
+

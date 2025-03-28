@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Detalle de Licencia</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <h1>Detalle de Licencia</h1>
+    <p>Legajo: <span th:text="${licencia.legajo}"></span></p>
+    <p>Empleado: <span th:text="${licencia.empleado}"></span></p>
+    <p>Fecha Inicio: <span th:text="${licencia.fechaInicio}"></span></p>
+    <p>Fecha Fin: <span th:text="${licencia.fechaFin}"></span></p>
+    <p>Días Solicitados: <span th:text="${licencia.diasSolicitados}"></span></p>
+    <p>Estado: <span th:text="${licencia.estado}"></span></p>
+    <a href="/web/licencias">Volver</a>
+	<!-- 🔹 Footer -->
+	
+	<div th:replace="~{fragments :: footer}"></div>
+	
+</body>
+
+
+</html>

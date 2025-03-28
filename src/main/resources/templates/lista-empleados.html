@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de Empleados</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+
+    <!-- 🔹 Menú -->
+    <div th:replace="~{fragments/menu :: menu}"></div>
+
+    <div class="container flex-grow-1 mt-4">
+        <h1>👤 Lista de Empleados</h1>
+
+        <!-- 📌 Mensajes de éxito o error -->
+        <div th:if="${error}" class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+            <strong>⚠️ Error:</strong> <span th:text="${error}"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+        </div>
+
+        <div th:if="${success}" class="alert alert-success alert-dismissible fade show text-center" role="alert">
+            <strong>✅ Éxito:</strong> <span th:text="${success}"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+        </div>
+
+        <a th:href="@{/web/empleados/nuevo}" class="btn btn-success mb-3 btn-sm">➕ Agregar Empleado</a>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Legajo</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>DNI</th>
+                    <th>Departamento</th>
+                    <th>Fecha Ingreso</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="empleado : ${empleados}">
+                    <td th:text="${empleado.idEmpleado}"></td>
+                    <td th:text="${empleado.legajo}"></td>
+                    <td th:text="${empleado.nombre}"></td>
+                    <td th:text="${empleado.apellido}"></td>
+                    <td th:text="${empleado.dni}"></td>
+                    <td th:text="${empleado.departamento}"></td>
+                    <td th:text="${empleado.fechaIngreso}"></td>
+                    <td class="d-flex gap-2">
+
+                        <!-- 📅 Ver Saldos -->
+                        <a th:href="@{/web/empleados/{id}/saldos(id=${empleado.idEmpleado})}" 
+                           class="btn btn-warning btn-sm">📅 Saldos</a>
+
+                        <!-- 📝 Licencia -->
+                        <a th:if="${empleado.estado.name() == 'ACTIVO'}"
+                           th:href="@{/web/empleados/{id}/solicitar-licencia(id=${empleado.idEmpleado})}" 
+                           class="btn btn-primary btn-sm">📝 Licencia</a>
+
+                        <!-- ✏️ Editar -->
+                        <a th:if="${empleado.estado.name() == 'ACTIVO'}"
+                           th:href="@{/web/empleados/{id}/editar(id=${empleado.idEmpleado})}" 
+                           class="btn btn-info btn-sm">✏️ Editar</a>
+
+                        <!-- ❌ Eliminar -->
+                        <a th:if="${empleado.estado.name() == 'ACTIVO'}"
+                           th:href="@{/web/empleados/{id}/eliminar(id=${empleado.idEmpleado})}" 
+                           class="btn btn-danger btn-sm">❌ Eliminar</a>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 🔹 Footer -->
+    <footer>
+        <div th:replace="~{fragments/footer :: footer}"></div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex-grow: 1; /* 🔹 Esto empuja el footer hacia abajo */
+}
+
+.nota {
+    max-width: 800px;
+    margin: 0 auto;
+    font-size: 1.1rem;
+    line-height: 1.7;
+}
+
+@media print {
+    .no-print {
+        display: none !important;
+    }
+
+    body {
+        margin: 0;
+        font-size: 12pt;
+    }
+}
+

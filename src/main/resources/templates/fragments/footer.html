@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+    <!-- 🌟 FOOTER MEJORADO 🌟 -->
+    <footer th:fragment="footer" class="bg-dark text-light py-2 mt-4">
+        <div class="container">
+            <div class="row text-center text-md-start align-items-center">
+                
+                <!-- 🟢 Columna Izquierda: Info del Sistema -->
+                <div class="col-md-4 mb-2 mb-md-0">
+                    <div class="d-flex flex-column align-items-center align-items-md-start">
+                        
+                        <p class="mb-1" style="font-size: 12px;">🚀 Desarrollado por <i>Carola Martin</i></p>
+                        <p class="mb-0" style="font-size: 12px;">📍 La Paz - Entre Ríos - Argentina</p>
+                    </div>
+                </div>
+
+                <!-- 🔵 Columna Central: Logo -->
+                <div class="col-md-4 text-center">
+                    <img th:src="@{/images/logo.png}" alt="CM_on.line Logo"
+                        class="img-fluid" style="max-width: 40px;">
+                </div>
+
+                <!-- 🔴 Columna Derecha: Redes Sociales + Contacto -->
+                <div class="col-md-4">
+                    <div class="d-flex flex-column align-items-center align-items-md-end">
+                        <p class="mb-1" style="font-size: 12px;">
+                            <a href="https://www.instagram.com/CM_on.line" target="_blank" class="text-light">
+                                📷 Instagram: <b>@CM_on.line</b>
+                            </a>
+                        </p>
+                        <p class="mb-0" style="font-size: 12px;">
+                            <a href="mailto:cm.yo.online@gmail.com" class="text-light">
+                                ✉️ Email: <b>cm.yo.online@gmail.com</b>
+                            </a>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- 🔹 Línea Separadora y Copyright -->
+            <hr class="bg-light my-2">
+            <div class="text-center" style="font-size: 11px;">
+                &copy; 2024 Sistema de Licencias - Todos los derechos reservados.
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
+

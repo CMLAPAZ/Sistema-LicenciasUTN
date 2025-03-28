@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Empleados</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+	<div th:replace="fragments/menu :: body"></div>
+
+<div class="container flex-grow-1 mt-4"	<div th:replace="~{fragments/footer :: footer}"></div>>
+    <h1 class="text-center">👤 Gestión de Empleados</h1>
+
+    <!-- Botón para agregar un nuevo empleado -->
+    <div class="mb-3">
+        <a href="/web/nuevo_empleado" class="btn btn-success">➕ Agregar Nuevo Empleado</a>
+    </div>
+
+    <!-- Tabla de empleados -->
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Legajo</th>
+                <th>Nombre Completo</th>
+                <th>DNI</th>
+                <th>Departamento</th>
+                <th>Fecha de Ingreso</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="empleado : ${empleados}">
+                <td th:text="${empleado.legajo}"></td>
+                <td th:text="${empleado.nombre + ' ' + empleado.apellido}"></td>
+                <td th:text="${empleado.dni}"></td>
+                <td th:text="${empleado.departamento}"></td>
+                <td th:text="${empleado.fechaIngreso}"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="/web/" class="btn btn-secondary mt-3">🏠 Volver al Inicio</a>
+</div>
+
+</body>
+</html>
