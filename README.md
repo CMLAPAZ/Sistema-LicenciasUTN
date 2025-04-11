@@ -14,7 +14,7 @@ Este sistema permite a los empleados de CELP solicitar licencias y a los adminis
 
 - 🌐 Proyecto basado en **Spring Boot**
 - 🎨 Frontend con **Thymeleaf + Bootstrap**
-- 🗄️ Base de datos relacional (**MySQL** o **H2**)
+- 🗄️ Base de datos relacional (**MySQL** )
 - 🔒 Control de acceso por roles (admin/empleado)
 
 ---
