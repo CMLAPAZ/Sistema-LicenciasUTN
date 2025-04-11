@@ -29,7 +29,7 @@ Este sistema permite a los empleados de CELP solicitar licencias y a los adminis
 - Spring Data JPA
 - Thymeleaf
 - Bootstrap
-- MySQL / H2
+- MySQL 
 - Git & GitHub
 
 ---
