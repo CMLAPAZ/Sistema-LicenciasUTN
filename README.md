@@ -19,13 +19,6 @@ Este sistema permite a los empleados de CELP solicitar licencias y a los adminis
 
 ---
 
-## 📷 Capturas de Pantalla
-
-| Formulario de solicitud | Vista administrador |
-|--------------------------|---------------------|
-| ![solicitud](docs/solicitud.png) | ![admin](docs/admin.png) |
-
-> *(Agregá capturas reales si querés que brillen más ✨)*
 
 ---
 
